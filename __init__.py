@@ -17,9 +17,7 @@ __author__ = 'whohlfeld'
 LOGGER = getLogger(__name__)
 
 
-DLF_URL = 'http://st01.dlf.de/dlf/01/128/mp3/stream.mp3'
-DRADIO_URL = 'http://st02.dlf.de/dlf/02/128/mp3/stream.mp3'
-NOVA_URL = 'http://st03.dlf.de/dlf/03/128/mp3/stream.mp3'
+RADIO_URL = 'http://st01.dlf.de/dlf/01/128/mp3/stream.mp3'
 
 
 class RadioSkill(MycroftSkill):
@@ -34,12 +32,12 @@ class RadioSkill(MycroftSkill):
         whatson_radio_intent = IntentBuilder("WhatsonRadioIntent").\
                          require("WhatsonKeyword").\
                          require("RadioKeyword").build()
-        self.register_intent(whatson_dlf_intent, self.handle_whatson_radio_intent)
+        self.register_intent(whatson_radio_intent, self.handle_whatson_radio_intent)
 
         radio_intent = IntentBuilder("RadioIntent").\
                         require("RadioKeyword").\
                         require("PlayKeyword").build()
-        self.register_intent(dlf_intent, self.handle_radio_intent)
+        self.register_intent(radio_intent, self.handle_radio_intent)
 
     def handle_whatson_radio_intent(self, message):
         r = requests.get('http://www.deutschlandfunk.de')
@@ -51,7 +49,7 @@ class RadioSkill(MycroftSkill):
 
     def handle_radio_intent(self, message):
         if self.audioservice:
-            self.audioservice.play(DLF_URL, message.data['utterance'])
+            self.audioservice.play(RADIO_URL, message.data['utterance'])
         else:
             self.process = play_mp3(DLF_URL)
 
