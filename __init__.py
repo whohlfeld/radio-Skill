@@ -24,7 +24,7 @@ NOVA_URL = 'http://st03.dlf.de/dlf/03/128/mp3/stream.mp3'
 
 class RadioSkill(MycroftSkill):
     def __init__(self):
-        super(RadioSkill, self).__init__(name="DlfSkill")
+        super(RadioSkill, self).__init__(name="RadioSkill")
         self.audioservice = None
 
     def initialize(self):
